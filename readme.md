@@ -15,9 +15,10 @@ vieoAutoPlay("#videoFrame");
 
 ## 方法2:npm
 1. 
-```
+```shell
 npm install --save-dev videoauto
-yarn add videoauto
+#或者使用yarn
+#yarn add videoauto 
 ```
 
 2. 调用
