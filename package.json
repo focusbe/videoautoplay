@@ -1,0 +1,23 @@
+{
+  "name": "videoauto",
+  "version": "1.0.0",
+  "description": "video autoplay",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pengzai-dev/videoautoplay.git"
+  },
+  "keywords": [
+    "video",
+    "autoplay"
+  ],
+  "author": "pengzai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pengzai-dev/videoautoplay/issues"
+  },
+  "homepage": "https://github.com/pengzai-dev/videoautoplay#readme"
+}

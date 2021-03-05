@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>视频自动播放</title>
+  </head>
+  <body>
+    <style>
+      video {
+        width: 100%;
+      }
+    </style>
+    <video id="videoFrame" src="https://video.c-ctrip.com/videos/AS0u1q000001hy4e47F27.mp4" controls playsinline></video>
+
+    <script src="./main.js"></script>
+    <script>
+      vieoAutoPlay("#videoFrame");
+    </script>
+  </body>
+</html>
