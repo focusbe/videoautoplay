@@ -7,11 +7,16 @@
     module.exports = factory();
   } else {
     //浏览器全局变量(root 即 window)
-    root.vieoAutoPlay = factory();
+    root.videoAutoPlay = factory();
   }
 })(this, function () {
   //方法
-  function vieoAutoPlay(video, allowMuted = true) {
+  function videoAutoPlay(video, options = {}) {
+    var defaultOptions = {
+      allowMuted: true,
+      playOnClick: true,
+    };
+    options = Object.assign(defaultOptions, options);
     video = typeof video == "string" ? document.querySelector(video) : video;
     var ua = navigator.userAgent.toLowerCase();
     var startEvent = "ontouchstart" in document.documentElement ? "touchstart" : "click";
@@ -21,6 +26,7 @@
     var runed = false;
     var play = function () {
       if (runed) {
+        startEl.removeEventListener(startEl, play);
         return;
       }
       video.muted = false;
@@ -47,21 +53,27 @@
         }
       } else {
         //
-        startEl.addEventListener(startEvent, play, {
-          once: false,
-          capture: false,
-        });
+        // if (options.playOnClick) {
+        //   startEl.addEventListener(startEvent, play, {
+        //     once: false,
+        //     capture: false,
+        //   });
+        // }
       }
-    } else if (allowMuted) {
-      //普通浏览器下
-      video.muted = true;
-      video.play();
-      startEl.addEventListener(startEvent, play, {
-        once: false,
-        capture: false,
-      });
+    } else {
+      if (options.allowMuted) {
+        //普通浏览器下
+        video.muted = true;
+        video.play();
+        if (options.playOnClick) {
+          startEl.addEventListener(startEvent, play, {
+            once: false,
+            capture: false,
+          });
+        }
+      }
     }
   }
   //暴露公共方法
-  return vieoAutoPlay;
+  return videoAutoPlay;
 });

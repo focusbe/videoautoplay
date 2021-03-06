@@ -14,7 +14,10 @@
 <video id="videoFrame" src="https://video.c-ctrip.com/videos/AS0u1q000001hy4e47F27.mp4" controls playsinline></video>
 <script src="./js/videoautoplay.js"></script> 
 <script>
-vieoAutoPlay("#videoFrame");
+videoAutoPlay("#videoFrame",{
+  playOnClick:true,
+  allowMuted:true
+});
 </script>
 
 ```
@@ -30,5 +33,16 @@ npm install --save-dev videoautoplay
 2. 调用
 ```javascript
 const videoAutoPlay = require("videoautoplay");
-vieoAutoPlay("#videoFrame");
+videoAutoPlay("#videoFrame",{
+  playOnClick:true,
+  allowMuted:true
+});
 ```
+
+## 参数说明
+videoAutoPlay(videoSelector,options);
+* videoSelector 是视频Dom的选择器
+* options 配置：
+
+* allowMuted ture|false 在浏览器容许的情况下是否启用“静音自动播放”
+* playOnClick true|false 是否在用户点击视频区域后取消静音，只有在“静音自动播放”模式下生效
