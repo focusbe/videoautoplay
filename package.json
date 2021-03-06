@@ -1,8 +1,8 @@
 {
-  "name": "videoauto",
+  "name": "videoautoplay",
   "version": "1.0.0",
   "description": "video autoplay",
-  "main": "main.js",
+  "main": "videoauto.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -16,7 +16,7 @@
     var ua = navigator.userAgent.toLowerCase();
     var startEvent = "ontouchstart" in document.documentElement ? "touchstart" : "click";
     var isWeixin = ua.match(/MicroMessenger/i) == "micromessenger";
-
+    var startEl = video;
     var isIos = !!ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/);
     var runed = false;
     var play = function () {
@@ -30,7 +30,7 @@
           runed = true;
         })
         .catch((err) => {
-          runed = false;
+          // runed = false;
         });
     };
     if (isWeixin) {
@@ -47,7 +47,7 @@
         }
       } else {
         //
-        document.addEventListener(startEvent, play, {
+        startEl.addEventListener(startEvent, play, {
           once: false,
           capture: false,
         });
@@ -56,7 +56,7 @@
       //普通浏览器下
       video.muted = true;
       video.play();
-      document.addEventListener(startEvent, play, {
+      startEl.addEventListener(startEvent, play, {
         once: false,
         capture: false,
       });

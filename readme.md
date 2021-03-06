@@ -7,22 +7,28 @@
 
 # 使用方法
 ## 方法1:直接调用
-1. 下载main.js
-2. 调用
-```javascript
+1. videoautoplay.js
+2. 引入并调用
+```html
+<!--./js/main.js替换为-->
+<video id="videoFrame" src="https://video.c-ctrip.com/videos/AS0u1q000001hy4e47F27.mp4" controls playsinline></video>
+<script src="./js/videoautoplay.js"></script> 
+<script>
 vieoAutoPlay("#videoFrame");
+</script>
+
 ```
 
 ## 方法2:npm
 1. 
 ```shell
-npm install --save-dev videoauto
+npm install --save-dev videoautoplay
 #或者使用yarn
 #yarn add videoauto 
 ```
 
 2. 调用
 ```javascript
-const videoAutoPlay = require("videoauto");
+const videoAutoPlay = require("videoautoplay");
 vieoAutoPlay("#videoFrame");
 ```
