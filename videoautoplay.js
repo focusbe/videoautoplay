@@ -21,7 +21,7 @@
     var ua = navigator.userAgent.toLowerCase();
     var startEvent = "ontouchstart" in document.documentElement ? "touchstart" : "click";
     var isWeixin = ua.match(/MicroMessenger/i) == "micromessenger";
-    var startEl = video;
+    var startEl = document;
     var isIos = !!ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/);
     var runed = false;
     var play = function () {
