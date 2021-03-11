@@ -19,7 +19,7 @@
     options = Object.assign(defaultOptions, options);
     video = typeof video == "string" ? document.querySelector(video) : video;
     var ua = navigator.userAgent.toLowerCase();
-    var startEvent = "ontouchstart" in document.documentElement ? "touchstart" : "click";
+    var startEvent = "ontouchstart" in document.documentElement ? "touchend" : "click";
     var isWeixin = ua.match(/MicroMessenger/i) == "micromessenger";
     var startEl = document;
     var isIos = !!ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/);
@@ -35,43 +35,44 @@
         .then(() => {
           runed = true;
         })
-        .catch((err) => {
-          // runed = false;
-        });
+        .catch((err) => {});
     };
+
+    function bindClickPlay() {
+      if (options.playOnClick) {
+        startEl.addEventListener(startEvent, play, {
+          once: false,
+          capture: false,
+        });
+      }
+    }
     if (isWeixin) {
       //在微信下
-      if (isIos) {
-        if (typeof WeixinJSBridgeReady === "undefined" && document.addEventListener) {
-          document.addEventListener(
-            "WeixinJSBridgeReady",
-            function () {
-              video.play();
-            },
-            false
-          );
-        }
-      } else {
-        //
-        // if (options.playOnClick) {
-        //   startEl.addEventListener(startEvent, play, {
-        //     once: false,
-        //     capture: false,
-        //   });
-        // }
+      if (typeof WeixinJSBridgeReady === "undefined" && document.addEventListener) {
+        document.addEventListener(
+          "WeixinJSBridgeReady",
+          function () {
+            video.play().catch((err) => {
+              //微信自动播放失败
+              bindClickPlay();
+            });
+          },
+          false
+        );
       }
     } else {
-      if (options.allowMuted) {
-        //普通浏览器下
-        video.muted = true;
-        video.play();
-        if (options.playOnClick) {
-          startEl.addEventListener(startEvent, play, {
-            once: false,
-            capture: false,
+      //普通浏览器下
+      video.play().catch(() => {
+        if (options.allowMuted) {
+          video.muted = true;
+          video.play().then(()=>{
+          }).catch(() => {
+            video.muted = false;
+            // alert('静音播放失败');
           });
         }
-      }
+        bindClickPlay();
+      });
     }
   }
   //暴露公共方法
